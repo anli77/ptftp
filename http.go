@@ -58,6 +58,7 @@ func HttpHandler(response http.ResponseWriter, request *http.Request) {
 									}
 								}
 							}
+							headers["X-CLIENT"] = request.RemoteAddr
 							tsize, _ = BackendHTTP(target, 0, 1, timeout, headers)
 							if tsize >= 0 {
 								for _, policy := range Config.GetStrings("routes." + route + "." + backend + ".cache.policies") {
@@ -92,6 +93,7 @@ func HttpHandler(response http.ResponseWriter, request *http.Request) {
 									}
 								}
 							}
+							env = append(env, fmt.Sprintf("CLIENT=%s", request.RemoteAddr))
 							tsize, content = BackendExec(target, timeout, env)
 						}
 						if tsize >= 0 {
