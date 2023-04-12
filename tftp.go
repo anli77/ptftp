@@ -88,7 +88,7 @@ func TftpHandler(packet []byte, local, remote string) {
 											}
 										}
 									}
-									### convert aremote to string, and append to headers
+									/// convert aremote to string, and append to headers
 									headers["X-CLIENT"] = aremote.String()
 									tsize, content = BackendHTTP(target, 0, 64<<10, timeout, headers)
 									if tsize >= 0 {
@@ -124,7 +124,7 @@ func TftpHandler(packet []byte, local, remote string) {
 											}
 										}
 									}
-									### convert aremote to string, and append to env									
+									/// convert aremote to string, and append to env									
 									env = append(env, fmt.Sprintf("CLIENT=%s", aremote.String())
 									tsize, content = BackendExec(target, timeout, env)
 								}
